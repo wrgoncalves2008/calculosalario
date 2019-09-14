@@ -10,10 +10,15 @@ public class CalculoSalarioTest {
 	
 	private SystemCalc calc;
 	
+	/* CONFIGURE AS VARIAVEIS ABAIXO O FUNCIONAMENTO DO PROJETO */
+	private String driver = "chrome";  //chrome ou opera
+	private String pathDriver = "/home/willians/eclipse/chromedriver";
+	private String homeurl = "http://192.168.5.115:9098";	
+	
 	@Before
 	public void gotoHomePage()
 	{
-		calc = new SystemCalc();
+		calc = new SystemCalc( homeurl , driver, pathDriver );
 		calc.irParaHomePage();		
 	}
 	

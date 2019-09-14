@@ -7,9 +7,10 @@ import org.openqa.selenium.WebElement;
 public class SystemCalc {
 	
 	//variaveis com as urls das paginas a serem acessadas 
-	private String pathDriver = "/home/willians/eclipse/chromedriver";
-	private String homeurl = "http://192.168.5.115:9098";
-	private String paginaCadastroDeCalculos = "http://192.168.5.115:9098/calculator/new";
+	private String pathDriver;
+	private String homeurl;
+	private String nomeDriver;
+	private String paginaCadastroDeCalculos = "/calculator/new";
 	
 	//Variaveis com os nomes dos campos na pagina de cadastro de novo salario
 	private String campoNome = "name";
@@ -20,15 +21,21 @@ public class SystemCalc {
 		
 	private WebDriver driver;
 	
+	public SystemCalc(String homeUrl, String nomeDriver ,String pathDriver) {
+		this.pathDriver = pathDriver;
+		this.homeurl = homeUrl;
+		this.nomeDriver = nomeDriver;
+	}
+	
 	public void irParaHomePage() {
 		
-		driver = SeleniumDrive.chromeDriver(pathDriver);
-		irParaPagina( homeurl );			
+		driver = SeleniumDrive.getDriver(this.nomeDriver,this.pathDriver);
+		irParaPagina( this.homeurl );			
 	}
 	
 	public void cadastrarNovoCalculoDeSalario( String nome, int dependentes, int horasTrabalhadas, double salarioPorHora )
-	{
-		irParaPagina( paginaCadastroDeCalculos);
+	{	
+		irParaPagina( this.homeurl + paginaCadastroDeCalculos);
 		
 		alimentarCampo(campoNome, nome);
 		alimentarCampo(campoDependentes, String.valueOf(dependentes));
